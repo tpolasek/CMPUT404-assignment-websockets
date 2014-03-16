@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 # Copyright (c) 2013-2014 Abram Hindle
-# Modified by (2014) Benson Trinh
+# Modified by (2014) Benson Trinh && Thomas Polasek
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -99,15 +99,9 @@ def read_ws(ws,client):
     try:
         while True:
             msg = ws.receive()
-            #print "WS RECV %s" % msg
             if msg is not None:
                 packet = json.loads(msg)
-                #print packet
-                # Receive each key and packet as they are updated and update 
-                # the current world with it. 
-                # The set function has the set listener to send the data to all clients
                 for k, data in packet.iteritems():
-                    #print "(k, data) is (%s,%s)" % (k,data)
                     myWorld.set(k,data)
             else:
                 break
